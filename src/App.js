@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import Card from "./Card.js";
+import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  let [data, setData] = useState([{}]);
+  let [loading, setLoading] = useState(false); //false initially
+  let [query, setQuery] = useState("");
+
+  const fetchdata = async () => {
+    const response = await fetch(
+      `https://www.breakingbadapi.com/api/characters?name=${query}`
+    );
+    const data = await response.json();
+    setLoading(true);
+    setData(data);
+  };
+
+  useEffect(() => {
+    fetchdata();
+  }, [query]);
+  if (loading) {
+    return (
+      <>
+        <nav>
+          <img
+            src="https://raw.githubusercontent.com/bradtraversy/breaking-bad-cast/master/src/img/logo.png"
+            alt="breaking bad logo"
+            className="logo"
+          ></img>
+        </nav>
+        <div>
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+            }}
+            placeholder="eg. Walter"
+            className="input"
+          ></input>
+        </div>
+        <section>
+          {data.map((item) => {
+            return <Card value={item} key={item.char_id}></Card>;
+          })}
+        </section>
+      </>
+    );
+  } else {
+    return (
+      <section>
+        <img src="https://raw.githubusercontent.com/bradtraversy/breaking-bad-cast/master/src/img/spinner.gif"></img>
+      </section>
+    );
+  }
 }
 
 export default App;

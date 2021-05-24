@@ -1,38 +1,94 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
+  background: #000
+    url("https://raw.githubusercontent.com/bradtraversy/breaking-bad-cast/master/src/img/bg.jpg")
+    no-repeat center center/cover;
+  height: 100vh;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.logo {
+  display: block;
+  margin: auto;
+  width: 150px;
+  margin-bottom: 6rem;
+  margin-top: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+section {
+  width: 70vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  /* background-color: aqua; */
+}
+
+.maincontainer {
+  height: 300px;
+  width: 250px;
+  /* margin-left: 80px; */
+  margin-right: 20px;
+  margin-top: 20px;
+}
+.image-content {
+  height: 300px;
+  width: 250px;
+}
+
+.thecard {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  transform-style: preserve-3d;
+  transition: all 0.8s ease;
+}
+
+/* THE PSUEDO CLASS CONTROLS THE FLIP ON MOUSEOVER AND MOUSEOUT */
+.thecard:hover {
+  transform: rotateY(180deg);
+}
+
+/* THE FRONT FACE OF THE CARD, WHICH SHOWS BY DEFAULT */
+.thefront {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  overflow: hidden;
+  /* background: #ffc728; */
+  color: #000;
+}
+
+/* THE BACK FACE OF THE CARD, WHICH SHOWS ON MOUSEOVER */
+.theback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  overflow: hidden;
+  background: black;
+  color: whitesmoke;
+  text-align: center;
+  transform: rotateY(180deg);
+}
+
+.input {
+  display: block;
+  width: 40vw;
+  height: 20px;
+  margin: auto;
 }
